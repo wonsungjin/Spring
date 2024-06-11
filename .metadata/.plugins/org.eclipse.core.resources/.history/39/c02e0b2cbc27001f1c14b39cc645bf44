@@ -1,0 +1,37 @@
+package com.lec03.spring;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+
+import com.lec01.hello.HomeController;
+
+@Controller
+public class EmpServlet{
+	private static final Logger logger = LoggerFactory.getLogger(EmpServlet.class);
+       
+    public EmpServlet() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=euc-kr");
+		
+		EmpDAO edao = new EmpDAO();
+		ArrayList<EmpVO> list = edao.empSelect();
+		
+		request.setAttribute("KEY_EMP",list);
+		request.getRequestDispatcher("lec02_servlet.jsp").forward(request, response);
+	}
+
+
+}
