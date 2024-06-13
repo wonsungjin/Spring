@@ -7,12 +7,16 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
+  
+  
+  <!-- @WebServlet("/emp_spring")  -->
   <servlet>
     <servlet-name>SPRING_SERVLET</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/spring/servlet-context.xml</param-value>
+      <param-value>/WEB-INF/spring/lec04-servlet-context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -21,22 +25,8 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   
-  
-  
+  <!-- @WebServlet("/emp")  -->
   <servlet>
-    <description></description>
-    <display-name>EmpController</display-name>
-    <servlet-name>EmpController</servlet-name>
-    <servlet-class>com.lec03.spring.EmpController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EmpController</servlet-name>
-    <url-pattern>/emp_spring</url-pattern>
-  </servlet-mapping>
-  
-    <servlet>
-    <description></description>
-    <display-name>EmpServlet</display-name>
     <servlet-name>EmpServlet</servlet-name>
     <servlet-class>com.lec02.servlet.EmpServlet</servlet-class>
   </servlet>
@@ -45,6 +35,26 @@
     <url-pattern>/emp</url-pattern>
   </servlet-mapping>
   
+<servlet>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.lec04.di.EmpController</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/emp_spring</url-pattern>
+</servlet-mapping>
+  
+  <!-- @WebServlet("/aaa")  -->
+  <servlet>
+    <description></description>
+    <display-name>THIS IS My FIRST TEST</display-name>
+    <servlet-name>DDDD</servlet-name>
+    <servlet-class>com.lec01.hello.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DDDD</servlet-name>
+    <url-pattern>/aaa</url-pattern>
+  </servlet-mapping>
   
   
   

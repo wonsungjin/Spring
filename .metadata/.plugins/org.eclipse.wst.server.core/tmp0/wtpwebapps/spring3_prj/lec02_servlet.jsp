@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach items="${KEY_EMP}" var="evo">
+<c:forEach items="${KEY_EMPLIST}" var="evo">
 
 	${evo.empno} , ${evo.ename} <br> 
 	
