@@ -11,9 +11,13 @@
 <body>
 
 <c:forEach items="${KEY_BOARDLIST}" var="bvo">
-	${bvo.seq} , ${bvo.title}, ${bvo.regdate} <br> 
+    <a href="${pageContext.request.contextPath}/board/detail?seq=${bvo.seq}">
+        ${bvo.title}
+    </a>, 
+    ${bvo.regdate}
+    <a></a>
+    <br>
 </c:forEach>
 <p><br>
-
 </body>
 </html>

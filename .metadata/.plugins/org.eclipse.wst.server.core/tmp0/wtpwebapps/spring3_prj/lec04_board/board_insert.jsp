@@ -17,7 +17,6 @@
 내용:<textarea name="contents"></textarea><br>
 <input type="submit" value="글쓰기">
 </form>
-
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script> $(function() { }); </script>		
 

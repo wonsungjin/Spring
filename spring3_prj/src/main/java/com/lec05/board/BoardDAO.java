@@ -150,12 +150,12 @@ public class BoardDAO {
 		}
 		return list;
 	}
-	public ArrayList<BoardVO> boardSelectOne(int seq) {
+	public BoardVO boardSelectOne(int seq) {
 		MyOracleConnection mc = new MyOracleConnection();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<BoardVO> list = null;
+	BoardVO vo = null;
 		 // set바인딩값타입(1번째물음표에 , 바인딩될값) 	
 		try {
 			conn = mc.oracleConn().getConnection();
@@ -163,22 +163,20 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, seq);  //--------런타임시 : 동적 바인딩
 			rs = pstmt.executeQuery();
-			list = new ArrayList();
 			while (rs.next() == true) {
-				BoardVO vo= new BoardVO
+				vo= new BoardVO
 				(rs.getString("contents"),
 						rs.getString("title"),
 						rs.getInt("seq"),
 						rs.getString("regid"),
 				rs.getString("regdate"));
-				list.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			mc.oracleClose(conn, pstmt);
 		}
-		return list;
+		return vo;
 	}
 	public ArrayList<ReplyVO> replyListOne(int seq)
 	{
@@ -211,7 +209,7 @@ public class BoardDAO {
 		}
 		return list;
 	}
-	public  ArrayList<BoardVO>  boardReplySelect(int seq)
+	public BoardVO  boardReplySelect(int seq)
 	{
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		MyOracleConnection mc = new MyOracleConnection();
@@ -227,7 +225,6 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, seq);  //--------런타임시 : 동적 바인딩
 			rs = pstmt.executeQuery();
-			list = new ArrayList();
 			while (rs.next() == true) 
 			{
 
@@ -260,6 +257,6 @@ public class BoardDAO {
 		} finally {
 			mc.oracleClose(conn, pstmt);
 		}
-		return list;
+		return vo;
 	}
 }
