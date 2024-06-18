@@ -2,4 +2,5 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.lec03.spring.EmpDAO"/>
     <fullyQualifiedTypeName name="com.lec03.spring.EmpVO"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,60 @@
+package com.lec05.rest;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.lec05.board.BoardDAO;
+import com.lec05.board.BoardVO;
+import java.util.stream.Collector;
+
+/**
+ * Servlet implementation class RestServletTest
+ */
+public class RestServletTest extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public RestServletTest() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+    Gson gson = new Gson();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ename = request.getParameter("content");
+		System.out.println(ename);
+		
+		BoardDAO dao = new BoardDAO();
+		ArrayList<BoardVO> list = dao.boardSelect();
+		String jsonStr = request.getReader().lines().collect(Collectors.joining());
+		System.out.println(jsonStr + "," + jsonStr.getClass());
+		
+		PrintWriter out = response.getWriter();
+		out.print(jsonStr);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json;charset=UTF-8");
+		String jsonStr = request.getParameter("objData");
+		System.out.println(jsonStr + "," + jsonStr.getClass());
+		PrintWriter out = response.getWriter();
+		out.print(jsonStr);
+	}
+
+}
