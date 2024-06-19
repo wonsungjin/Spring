@@ -1,0 +1,5 @@
+package com.lec05.board;
+
+public class BoardServiceImpl implements BoardService {
+
+}

@@ -6,7 +6,6 @@
 	<mvc:annotation-driven />
 	  
 <!--   적용 대상 패키지 -->
-	<context:component-scan base-package="com.lec05.board" />
 	<context:component-scan base-package="com.lec05.rest" />
 	 
 <!--  웹서비스용   -->

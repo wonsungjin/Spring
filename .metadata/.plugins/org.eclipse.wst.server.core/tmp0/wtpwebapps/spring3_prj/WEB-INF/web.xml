@@ -44,7 +44,7 @@
     <description></description>
     <display-name>RestServletTest</display-name>
     <servlet-name>RestServletTest</servlet-name>
-    <servlet-class>com.lec05.rest.RestServletTest</servlet-class>
+    <servlet-class>com.lec05.rest.BoardController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RestServletTest</servlet-name>

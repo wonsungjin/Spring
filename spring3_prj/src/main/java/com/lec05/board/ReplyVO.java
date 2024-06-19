@@ -2,7 +2,6 @@ package com.lec05.board;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class ReplyVO {
 	private int rseq;  //PK
 	private String reply;

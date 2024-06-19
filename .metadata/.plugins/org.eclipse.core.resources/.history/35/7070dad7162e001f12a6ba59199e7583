@@ -1,0 +1,6 @@
+package com.lec05.rest;
+
+public interface BoardService {
+	
+
+}

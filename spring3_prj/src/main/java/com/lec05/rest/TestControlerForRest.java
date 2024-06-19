@@ -1,5 +1,6 @@
 package com.lec05.rest;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lec05.board.BoardDAO;
-import com.lec05.board.BoardVO;
+import com.google.gson.Gson;
+import com.lec05.rest.BoardDAO;
+import com.lec05.rest.BoardVO;
 
 @Controller
 public class TestControlerForRest {
