@@ -48,15 +48,12 @@
 </table>
 </form>
 
-<br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <!-- --------------------------------------- 댓글목록 ------------------------------- -->
 <br>
-<div id="replyListDiv">
-	<table width=100% border=1>
-		<tr><td></td></tr>
-	</table>
-</div>
+<div id="replyListDiv"></div>
 
 
 <!-- --------------------------------------- 댓글등록 ------------------------------- -->
@@ -77,9 +74,9 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
 		$(function() {
+			//---------------------------------------------------------------------------------------------------------
+			//화면 준비되면 댓글목록 바로 가져오기 :::  REST
 			function makeTable() {
-				
-				//화면 준비되면 댓글목록 바로 가져오기 :::  REST
 				$.ajax({
 					method      : "POST",
 			        url         : "${pageContext.request.contextPath}/reply_list_rest",
@@ -89,13 +86,26 @@
 			  		success     : function(myval){ 
 			  										console.log("성공:" + myval);  //ResponseEntity<>(rlist, HttpStatus.OK)   
 			  										
-			  										var htmlStr = "<table border=1 width=50%>";
-			  										$.map( myval, function( MYval, MYidx ) {
-			  											htmlStr += "<tr><td><font color='red'><input type='button' id='replyDeleteBtn' value='[X]' data-rseq='" + MYval.rseq + "' data-seq='" + MYval.seq + "'></font>" + MYval.reply + "</td></tr>";
-
-			  											//console.log(MYval["title"] + "," + MYval["regid"] + "," + MYidx);
+			  										//----------------------------------------
+			  										// a href로 삭제 버튼 표현한 경우
+			  										//----------------------------------------
+			  										//var htmlStr = "<table border=1 width=50%>";
+			  										//$.map( myval, function( MYval, MYidx ) {                                    
+			  										//	htmlStr += "<tr><td><font color=red><a href='#' class='reply_delete_a' data-seq='"+MYval.seq+"' data-rseq='"+MYval.rseq+ "'>[X]</a></font>" + MYval.reply + "</td></tr>";
+			  										//});
+			  										//htmlStr += "</table>";
+			  										
+			  										//----------------------------------------
+			  										// form로 삭제 버튼 표현한 경우
+			  										//----------------------------------------
+			  										var htmlStr = "<form><table border=1 width=50%>";
+			  										$.map( myval, function( MYval, MYidx ) {                                    
+			  											htmlStr += "<tr><td><input type='button' value='[X]'  class='reply_delete_btn' data-seq='"+MYval.seq+"' data-rseq='"+MYval.rseq+ "'>" + MYval.reply + "</td></tr>";
 			  										});
-			  										htmlStr += "</table>";
+			  										htmlStr += "</table></form>";
+			  										
+			  										
+			  										
 			  										$("#replyListDiv").empty();
 			  										$("#replyListDiv").html(htmlStr);
 			  										
@@ -103,11 +113,12 @@
 				});
 			}
 			
-			
+			//---------------------------------------------------------------------------------------------------------
 			//화면이 실행되자마자 댓글목록 가져오기 :: REST
 			makeTable();
 			
 			
+			//---------------------------------------------------------------------------------------------------------
 			//댓글 입력 :: REST
 			$("#replyInsertBtn").click(  function(){
 				var formData = $("#replyInsertForm").serialize();
@@ -124,26 +135,64 @@
 			  									}
 				});
 			});
+			
+			//---------------------------------------------------------------------------------------------------------
 			//댓글 삭제 :: REST
-					$(document).on("click", "#replyDeleteBtn", function() {
-						var rseq = $(this).data("rseq");
-					    var seq = $(this).data("seq");
-					    var formData = { rseq: rseq, seq: seq }; // formData 정의
-					    
-		    $.ajax({
-		        method: "POST",
-		        url: "${pageContext.request.contextPath}/reply_delete_rest",
-		        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		        data: formData,
-		        error: function(myval) {
-		            console.log("에러:" + myval);
-		        },
-		        success: function(myval) {
-		            console.log("삭제성공:" + myval);
-		            makeTable();
-		        }
-		    });
-});
+			//동적으로 엘리먼트가 생성되는 경우 클릭이벤트 
+			//  : <a href='#' class='reply_delete_a' data-seq='3' data-rseq='2'>[X]</a> 
+			$(document).on("click", ".reply_delete_a",  function(event){
+				event.preventDefault(); 		//페이지이동 막기 ==  href='#'
+                var seq  = $(this).attr("data-seq");
+                var rseq = $(this).data("rseq");    //data-rseq 
+                formData = "seq="+seq+"&rseq="+rseq;
+				alert(formData);
+				
+				$.ajax({
+					method      : "POST",
+			        url         : "${pageContext.request.contextPath}/reply_delete_rest",
+			        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+			        data 		: formData,
+			        error 	    : function(myval){ console.log("에러:" + myval);   },
+			  		success     : function(myval){ 
+			  										console.log("성공:" + myval);  //msg = "입력성공"   
+			  										makeTable();
+			  									}
+				});
+				
+			});
+			//---------------------------------------------------------------------------------------------------------
+			//댓글 삭제 :: REST
+			//동적으로 엘리먼트가 생성되는 경우 클릭이벤트 
+			//    : <form><input type='button' class='reply_delete_btn'> 사용할 경우
+			$(document).on("click", ".reply_delete_btn",  function(event){
+				event.preventDefault(); 		//페이지이동 막기
+                var seq  = $(this).attr("data-seq");
+                var rseq = $(this).data("rseq");
+                formData = "seq="+seq+"&rseq="+rseq;
+				alert(formData);
+				
+				$.ajax({
+					method      : "POST",
+			        url         : "${pageContext.request.contextPath}/reply_delete_rest",
+			        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+			        data 		: formData,
+			        error 	    : function(myval){ console.log("에러:" + myval);   },
+			  		success     : function(myval){ 
+			  										console.log("성공:" + myval);  //msg = "입력성공"   
+			  										makeTable();
+			  									}
+				});
+				
+			});
+			
+			
+			
+			
+			//---------------------------------------------------------
+			// <form> 제어하기
+			//---------------------------------------------------------
+			//$(".btn.btn-primary.btn-block").click()~~
+			
 			$("#uptButton").click(  function(){
 				alert("수정");
 				$("#boardForm").attr("method","post");
@@ -163,6 +212,7 @@
 			});            
 			
 			//------------------------------------------------------------
+			
 		});
 		
 	</script>

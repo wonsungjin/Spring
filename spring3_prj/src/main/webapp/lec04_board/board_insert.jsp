@@ -12,11 +12,12 @@
 </head>
 <body>
 
-<form action="/board/insert" method="post">
+<form action="${pageContext.request.contextPath}/board_insert" method="post">
 제목:<input type="text" name="title"><br>
 내용:<textarea name="contents"></textarea><br>
 <input type="submit" value="글쓰기">
 </form>
+
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script> $(function() { }); </script>		
 

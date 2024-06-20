@@ -31,7 +31,7 @@
 		</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/spring/lec04-servlet-context.xml</param-value>
+      <param-value>/WEB-INF/spring/lec06-servlet-context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -39,15 +39,35 @@
     <servlet-name>SPRING_SERVLET</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.lec02.servlet.EmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/emp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>THIS IS My FIRST TEST</display-name>
+    <servlet-name>DDDD</servlet-name>
+    <servlet-class>com.lec01.hello.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DDDD</servlet-name>
+    <url-pattern>/aaa</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <description></description>
     <display-name>RestServletTest</display-name>
     <servlet-name>RestServletTest</servlet-name>
-    <servlet-class>com.lec05.rest.BoardController</servlet-class>
+    <servlet-class>com.lec05.rest.RestServletTest</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RestServletTest</servlet-name>
     <url-pattern>/RestServletTest</url-pattern>
   </servlet-mapping>
+  
+  
 </web-app>

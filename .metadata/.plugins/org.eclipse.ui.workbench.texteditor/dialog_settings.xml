@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="svcReplyListForRest"/>
+		<item key="selection" value="aOPService"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="aOPService"/>
+			<item value="aOPDAO"/>
+			<item value="aOPServiceImpl"/>
+			<item value="MY_ASPECT"/>
 			<item value="svcReplyListForRest"/>
 			<item value="//댓글목록 : REST"/>
 			<item value="svcReplySearchForRest"/>
@@ -19,17 +23,13 @@
 			<item value="= ename"/>
 			<item value="수정"/>
 			<item value="insert"/>
-			<item value="console"/>
-			<item value="log"/>
-			<item value="out"/>
-			<item value="anno"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="338"/>
-		<item key="DIALOG_Y_ORIGIN" value="263"/>
+		<item key="DIALOG_X_ORIGIN" value="1140"/>
+		<item key="DIALOG_Y_ORIGIN" value="254"/>
 		<item key="DIALOG_WIDTH" value="288"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

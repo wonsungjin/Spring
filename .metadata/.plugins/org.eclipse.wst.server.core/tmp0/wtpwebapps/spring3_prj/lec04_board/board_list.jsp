@@ -11,13 +11,11 @@
 <body>
 
 <c:forEach items="${KEY_BOARDLIST}" var="bvo">
-    <a href="${pageContext.request.contextPath}/board/detail?seq=${bvo.seq}">
-        ${bvo.title}
-    </a>, 
-    ${bvo.regdate}
-    <a></a>
-    <br>
+	${bvo.seq} , 
+	<a href="${pageContext.request.contextPath}/board_detail?seq=${bvo.seq}">${bvo.title}</a>, 
+	${bvo.regdate} <br> 
 </c:forEach>
 <p><br>
+<a href="${pageContext.request.contextPath}/lec04_board/board_insert.jsp">글쓰기</a>
 </body>
 </html>

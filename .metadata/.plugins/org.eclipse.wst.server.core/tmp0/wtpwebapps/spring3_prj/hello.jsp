@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:set var="myvar" value="3"/>
-${myvar}
+<c:set var="myval" value="3"/>
+${myval}
+
+hello 한글테스트
 </body>
 </html>

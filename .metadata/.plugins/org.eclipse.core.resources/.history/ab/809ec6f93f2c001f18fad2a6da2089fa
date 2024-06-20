@@ -1,8 +1,0 @@
-package com.lec05.rest;
-
-import org.springframework.stereotype.Controller;
-
-@Controller
-public class BoardRestController {
-
-}
