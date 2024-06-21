@@ -26,4 +26,24 @@
     <!--
     <Manager pathname="" />
     -->
+    <!--  데이터소스 설정 -->
+    <Resource name="MY_tomcat_ds"
+
+              auth="Container"
+
+              type="javax.sql.DataSource"
+
+              maxTotal="30"
+
+              maxIdle="5"
+
+              maxWaitMillis="10000"
+
+              username="it"
+
+              password="0000"
+
+              driverClassName="oracle.jdbc.driver.OracleDriver"
+
+              url="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
 </Context>
