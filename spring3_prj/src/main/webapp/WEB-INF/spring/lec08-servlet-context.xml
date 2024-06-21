@@ -6,13 +6,25 @@
 <mvc:annotation-driven/>
 <!--  적용 대상 패키지  -->
 <context:component-scan base-package="com.lec08.dao"/>
-<!--  datasource  -->
-<bean id="MY_tomcat_ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-<property name="username" value="it"/>
-<property name="password" value="0000"/>
-</bean>
+
+<!-- DataSource 설정을 프로퍼티 방식으로 변경 -->
+    <context:property-placeholder location="classpath:oracle.properties" />
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+        <property name="driverClassName" value="${lec.driver}" />
+        <property name="url" value="${lec.url}" />
+        <property name="username" value="${lec.username}" />
+        <property name="password" value="${lec.userpw}" /> 
+    </bean>
+
+
+    <!-- DataSource 설정 = 하드코딩한 형태 이다
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+        <property name="username" value="it" />
+        <property name="password" value="0000" /> 
+    </bean>
+    -->
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 <property name="prefix" value="/"/>
 <property name="suffix" value=".jsp"/>
