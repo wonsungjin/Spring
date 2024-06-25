@@ -8,6 +8,8 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="userVO"/>
+			<item value="aop"/>
 			<item value="ojd"/>
 			<item value="data"/>
 			<item value="ds."/>
@@ -21,8 +23,6 @@
 			<item value="svcReplySearchForRest"/>
 			<item value="replyInsertBtn"/>
 			<item value="replyInsertForm"/>
-			<item value="reply_list"/>
-			<item value="ename"/>
 		</list>
 		<list key="replacehistory">
 		</list>

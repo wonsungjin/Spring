@@ -23,11 +23,6 @@
 		</environment>
 	</environments>
 	
-	<!-- mapper -->
-	<mappers>
-		<mapper resource="board-map-lec08.xml" />		
-		<mapper resource="user-map-lec08.xml" />
-	</mappers>
-	
+
 
 </configuration>

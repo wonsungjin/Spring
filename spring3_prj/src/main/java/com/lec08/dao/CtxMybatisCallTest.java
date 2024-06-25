@@ -64,6 +64,8 @@ public class CtxMybatisCallTest {
 //  			----------------------------------------------------------------
   			vo.setUserId("user2");
   			vo.setUserPw("999");
+  			vo.setUserName("원승진");
+  			vo.setUserGubun("u");
   			Integer res = (Integer)session.insert("userNameSpace.userInsert", vo);
   			session.commit();
   			System.out.println("RES:" + res);
