@@ -29,6 +29,7 @@ public interface BoardMapper {
     int svcboardUpdate(@ModelAttribute BoardVO bvo);
 
     // 댓글 목록 조회 (REST)
+    ArrayList<ReplyVO> getReplyBySeq(@RequestParam("seq") int seq);
     ArrayList<ReplyVO> svcReplyListForRest(@RequestParam("seq") int seq);
 
     // 댓글 등록 (REST)

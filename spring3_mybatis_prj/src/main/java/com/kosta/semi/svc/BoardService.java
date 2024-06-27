@@ -13,7 +13,7 @@ public interface BoardService {
     
     // 게시물 삽입
     int svcBoardInsert(@ModelAttribute BoardVO bvo);
-
+    ArrayList<ReplyVO> getReplyBySeq(int seq);
     // 게시물 목록 조회
     ArrayList<BoardVO> svcBoardList();
 
@@ -28,10 +28,10 @@ public interface BoardService {
     ArrayList<ReplyVO> svcReplyListForRest(@RequestParam("seq") int seq);
 
     // 댓글 등록 (REST)
-    String svcReplyInsertForRest(@ModelAttribute ReplyVO rvo);
+    int svcReplyInsertForRest(@ModelAttribute ReplyVO rvo);
 
     // 댓글 삭제 (REST)
-    String svcReplyDeleteForRest(@ModelAttribute ReplyVO rvo);
+    int svcReplyDeleteForRest(@ModelAttribute ReplyVO rvo);
 
     // 검색을 통한 댓글 목록 조회 (REST)
     ArrayList<BoardVO> svcReplySearchForRest(@RequestParam("search_str") String str);
