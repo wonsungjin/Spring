@@ -3,7 +3,8 @@ package com.kosta.semi.mappers;
 import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-import com.kosta.semi.UserVO;
+
+import com.kosta.semi.vo.UserVO;
 
 @Repository
 @Mapper

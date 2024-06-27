@@ -1,4 +1,4 @@
-package com.kosta.semi;
+package com.kosta.semi.ctl;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.kosta.semi.svc.UserService;
+import com.kosta.semi.vo.UserVO;
 
 @Controller
 public class UserController {

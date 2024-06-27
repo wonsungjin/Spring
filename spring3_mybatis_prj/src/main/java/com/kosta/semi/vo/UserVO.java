@@ -1,4 +1,4 @@
-package com.kosta.semi;
+package com.kosta.semi.vo;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;

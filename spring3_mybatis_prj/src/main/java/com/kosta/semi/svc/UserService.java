@@ -1,6 +1,8 @@
-package com.kosta.semi;
+package com.kosta.semi.svc;
 
 import java.util.ArrayList;
+
+import com.kosta.semi.vo.UserVO;
 
 public interface UserService {
 	public int svcUserInsert(UserVO uvo);
