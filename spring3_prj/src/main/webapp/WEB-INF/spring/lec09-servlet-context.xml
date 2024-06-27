@@ -27,7 +27,9 @@
 	<!--  어노테이션 기반 -->
 	<mvc:annotation-driven /> 
 	<!-- 적용 대상 패키지 -->
+	<context:component-scan base-package="com.lec09.orm.mybatis.mapper" />
 	<context:component-scan base-package="com.lec09.orm.mybatis" />
+	
 	
 	
 	<!-- datasource : 프로퍼티 파일을 사용한 형태 -->
@@ -89,7 +91,7 @@
 	-->
 	
 	<!-- ==============================================
-	   annotation 기반 설정 시 
+	   annotation 기반 설정 시  @Transaction
 	 ================================================== -->
 	<tx:annotation-driven transaction-manager="txManager"/> 
 	
@@ -130,11 +132,13 @@
 	  UserMapper.java 인터페이스를 사용할 경우
 	  without DAO, using mapper interface 
 	 ================================================== --> 
-	<!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.lec09.orm.mybatis.mapper"/>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/> 
-	</bean>-->
+	</bean>
  	
+	
 	 <!-- UsersMapper bean definition -->
     <!--<bean id="myUsersMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.lec09.orm.mybatis.mapper.UserMapper"/>
@@ -145,11 +149,6 @@
     <!--<bean id="userService" class="com.lec09.orm.mybatis.UserServiceImpl">
         <property name="mapper" ref="myUsersMapper"/>
     </bean>-->
-    
-    
-    
-    
-   
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
