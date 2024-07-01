@@ -1845,3 +1845,117 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:13:53.573
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:46:19.070
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:46:19.072
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.755
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.756
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.756
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.757
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.758
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.759
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.759
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.760
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.768
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.772
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.773
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.773
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.775
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.775
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.776
+!MESSAGE Null entry in the set of referencable nodes. Name: 'boardRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.springframework.ide.eclipse.beans.ui.editor 2 0 2024-07-01 17:46:19.776
+!MESSAGE Null entry in the set of referencable nodes. Name: 'userRepository'. Locator class: org.springframework.ide.eclipse.data.beans.ui.editor.RepositoriesReferenceableElementLocator
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:46:44.017
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:46:44.021
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:06.306
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:06.309
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:08.574
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:08.576
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:56.237
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:56.240
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:57.451
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:47:57.455
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:12.168
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:12.171
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:22.464
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:22.466
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:32.846
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:32.850
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:37.817
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:37.819
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:41.994
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-07-01 17:48:41.997
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!

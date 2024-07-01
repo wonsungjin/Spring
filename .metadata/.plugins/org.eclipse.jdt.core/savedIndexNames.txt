@@ -35,7 +35,6 @@ INDEX VERSION 1.131+C:\IT\S3917_J11\workspace_sts3\.metadata\.plugins\org.eclips
 1183523109.index
 4008566315.index
 1999866276.index
-1431421018.index
 350068385.index
 2708695458.index
 3314195908.index

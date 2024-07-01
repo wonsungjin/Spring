@@ -1,46 +1,48 @@
 package com.kosta.semi.jpa.entity;
 
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-import java.util.Date;
-
-
-/*<class name="UserVO" table="users3">
-	<id name="userSeq" column="user_seq" />
-	<property name="userId" column="user_id" />
-	<property name="userPw" column="user_pw" />
-	<property name="userName" column="user_name" />
-	<property name="userGubun" column="user_gubun" />
-	<property name="regdate" column="regdate" />
-</class>*/
-
 @Data
-@Entity(name = "BoardEntityJPA")
+@Entity 
 @Table(name = "board")
 public class BoardEntity {
-    
-    @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq_gen")
     @SequenceGenerator(name = "board_seq_gen", sequenceName = "board_seq", allocationSize = 1)
     @Column(name = "seq")
-    private Long seq;
-    
-    @Column(name = "title", nullable = false, length = 30)
+	private Long seq;            //PK sequence
+	
+	@Column(name = "title", nullable = false, length = 30)
     private String title;
-    
-    @Column(name = "contents", nullable = false, length = 50)
-    private String contents;
-    
-    @Column(name = "regid", nullable = false,length = 10)
-    private String regid;
-        
-    @Column(name = "regdate")
+	
+	@Column(name = "contents",  length = 50)
+	private String contents;
+	
+	@Column(name = "regid",  length = 10)
+	private String regid="jpauser";       //session cookie
+	
+	@Column(name = "regdate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date regdate = new Date();
-
-    // lombok : getters and setters
+	
+	@OneToMany(mappedBy = "board")
+	List<ReplyEntity> replies;      //1:N
 }
