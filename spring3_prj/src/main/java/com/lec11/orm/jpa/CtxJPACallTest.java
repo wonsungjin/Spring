@@ -32,43 +32,43 @@ public class CtxJPACallTest {
 		em.close();
 		emf.close();
 		
-//		
-//		//------------------------------------------------
-//		//select * from users3 where userId='admin' and userPw='0000';
-//		// EntityManagerFactory 및 EntityManager 생성
-//		//------------------------------------------------
-//        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("my-persistence-unit");
-//        EntityManager em2 = emf2.createEntityManager();
-//
-//        // Transaction 시작
-//        em2.getTransaction().begin();
-//
-//        // CriteriaBuilder & CriteriaQuery 생성
-//        CriteriaBuilder builder = em2.getCriteriaBuilder();
-//        CriteriaQuery<UserEntity> query = builder.createQuery(UserEntity.class);
-//
-//        //쿼리생성
-//		Root<UserEntity> root = query.from(UserEntity.class);
-//        Predicate userIdPredicate = builder.equal(root.get("userId"), "admin");
-//        Predicate userPwPredicate = builder.equal(root.get("userPw"), "0000");
-//        query.where(builder.and(userIdPredicate, userPwPredicate));
-//
-//        // 쿼리 실행 및 결과 조회
-//        UserEntity entity  = null;
-//        try {
-//        	entity = em2.createQuery(query).getSingleResult();
-//        	if (entity  != null) {
-//                System.out.println("로그인 성공: " + entity);
-//            }
-//        } catch (Exception e) {  //결과가 없을 경우 NoResultException을 발생
-//            System.out.println("로그인 실패");
-//        }
-//
-//        // Transaction 커밋 및 엔티티 매니저 종료
-//        em2.getTransaction().commit();
-//        em2.close();
-//        emf2.close();
-//        
+		
+		//------------------------------------------------
+		//select * from users3 where userId='admin' and userPw='0000';
+		// EntityManagerFactory 및 EntityManager 생성
+		//------------------------------------------------
+        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("my-persistence-unit");
+        EntityManager em2 = emf2.createEntityManager();
+
+        // Transaction 시작
+        em2.getTransaction().begin();
+
+        // CriteriaBuilder & CriteriaQuery 생성
+        CriteriaBuilder builder = em2.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> query = builder.createQuery(UserEntity.class);
+
+        //쿼리생성
+		Root<UserEntity> root = query.from(UserEntity.class);
+        Predicate userIdPredicate = builder.equal(root.get("userId"), "admin");
+        Predicate userPwPredicate = builder.equal(root.get("userPw"), "0000");
+        query.where(builder.and(userIdPredicate, userPwPredicate));
+
+        // 쿼리 실행 및 결과 조회
+        UserEntity entity  = null;
+        try {
+        	entity = em2.createQuery(query).getSingleResult();
+        	if (entity  != null) {
+                System.out.println("로그인 성공: " + entity);
+            }
+        } catch (Exception e) {  //결과가 없을 경우 NoResultException을 발생
+            System.out.println("로그인 실패");
+        }
+
+        // Transaction 커밋 및 엔티티 매니저 종료
+        em2.getTransaction().commit();
+        em2.close();
+        emf2.close();
+        
         
         String xmlFile = "C:\\IT\\S3917_J11\\workspace_sts3\\spring3_prj\\src\\main\\webapp\\WEB-INF\\spring\\lec11-servlet-context.xml";
         ApplicationContext ctx = new FileSystemXmlApplicationContext(xmlFile);
