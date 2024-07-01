@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.lec03.spring.EmpDAO"/>
-    <fullyQualifiedTypeName name="com.lec03.spring.EmpVO"/>
-    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
-    <fullyQualifiedTypeName name="com.lec09.orm.mybatis.UserVO"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>

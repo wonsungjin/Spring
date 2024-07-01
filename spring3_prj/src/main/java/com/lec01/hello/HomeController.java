@@ -11,18 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Handles requests for the application home page.
+ */
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public String boardSelect(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		model.addAttribute("MY_ADDR", "머임" );
-		return "board_select";
-	}	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -31,17 +31,9 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("MY_NAME", "머임" );
+		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
-	}
-	@RequestMapping(value = "/emp", method = RequestMethod.GET)
-	public String emp(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		model.addAttribute("KEY_EMP", "머임" );
-		
-		return "lec02_servlet";
 	}
 	
 }

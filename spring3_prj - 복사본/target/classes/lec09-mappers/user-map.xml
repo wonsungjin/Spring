@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  
+	"(properties?, ##
+	settings?,
+	typeAliases?,  ##
+	typeHandlers?,
+	objectFactory?,
+	objectWrapperFactory?,
+	plugins?,
+	environments?,  ##
+	mappers?)"   ##
+	  -->
+
+
+<mapper namespace="com.lec09.orm.mybatis.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.lec09.orm.mybatis.UserVO">
+        <id property="userSeq" column="user_seq"/>
+        <result property="userId" column="user_id"/>
+        <result property="userPw" column="user_pw"/>
+        <result property="userName" column="user_name"/>
+        <result property="userGubun" column="user_gubun"/>
+        <result property="regdate" column="regdate"/>
+    </resultMap>
+
+    <!-- 관련된 User 리스트 -->
+    <select id="getUserBySeq" resultMap="userResultMap">
+        SELECT user_seq, user_id, user_pw, user_name, user_gubun, regdate
+        FROM users3
+        WHERE user_seq = #{userSeq}
+    </select>
+
+    <insert id="userInsert" parameterType="com.lec09.orm.mybatis.UserVO">
+        INSERT INTO users3 (user_seq, user_id, user_pw, user_name, user_gubun)
+        VALUES (users3_seq.nextval, #{userId}, #{userPw}, #{userName}, #{userGubun})
+    </insert>
+
+    <select id="userSelectAll" resultMap="userResultMap">
+        SELECT * FROM users3
+    </select>
+
+    <select id="userLogin" resultMap="userResultMap">
+        SELECT user_seq, user_id, user_pw, user_name, user_gubun, regdate FROM users3 WHERE user_id = #{userId} AND user_pw = #{userPw}
+    </select>
+
+    <update id="userUpdate" parameterType="com.lec09.orm.mybatis.UserVO">
+        UPDATE users3 SET user_id=#{userId}, user_pw=#{userPw} WHERE user_seq=#{userSeq}
+    </update>
+
+    <delete id="userDelete" parameterType="int">
+        DELETE FROM users3 WHERE user_seq=#{userSeq}
+    </delete>
+    
+
+	
+</mapper>
+
+
+  
