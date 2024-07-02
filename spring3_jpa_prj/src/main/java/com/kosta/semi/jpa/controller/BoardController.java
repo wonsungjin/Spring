@@ -1,64 +1,100 @@
 package com.kosta.semi.jpa.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired; //@Autowired
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;              //@Controller
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute; //@ModelAttribute	
+import org.springframework.web.bind.annotation.RequestMapping; //@RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod;  //@RequestMapping
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.semi.jpa.entity.BoardEntity;
+import com.kosta.semi.jpa.entity.ReplyEntity;
 import com.kosta.semi.jpa.service.BoardService;
 
 @Controller
-public class BoardController {
+public class BoardController  {
+	
 	@Autowired
 	private BoardService boardService;
 	
-	
-	
-	@RequestMapping(value="/board_list")
-	//http://localhost:8089/jpa_list
-	public String ctlBoardList(ModelMap model) {
-		List<BoardEntity> list = boardService.svcBoardList();
-		model.addAttribute("MY_LIST", list);
-		System.out.println(list.toString());
-		return "hello";
+	@RequestMapping(value = "/board_insert", method = RequestMethod.POST)
+	public String ctlBoardInsert(@ModelAttribute BoardEntity bvo) {
+		boardService.svcBoardInsert(bvo);
+		return "redirect:/board_list";						//   /board_list
 	}
 	
+	@RequestMapping(value = "/board_list")
+	public String ctlBoardList(Model model){
+		ArrayList<BoardEntity> list = (ArrayList)boardService.svcBoardSelect();
+		model.addAttribute("KEY_BOARDLIST", list);
+		return "board/board_list";     				//   /  lec05_board/board_list  .jsp  
+	}
 	
-	//http://localhost:8089/jpa_detail?BoardSeq=1
-	//@RequestMapping(value="/jpa_detail")
-	//public String ctlBoardDetail(ModelMap model, @RequestParam("BoardSeq") int BoardSeq) {
-		
-	//http://localhost:8089/jpa_detail/1
-	@RequestMapping(value="/board_detail/{aaa}")
-	public String ctlBoardDetail(ModelMap model, @PathVariable("aaa") Long BoardSeq) {
-		BoardEntity entity = boardService.svcBoardDetail(BoardSeq);
-		model.addAttribute("MY_ENTITY", entity);
-		System.out.println(entity.toString());
-		return "hello";
+	@RequestMapping(value = "/board_detail")
+	public String ctlBoardDetail(Model model, @RequestParam("seq") Long seq){
+		//------------------------------------------------------
+		//상세만 가져가고 ,댓글목록은 (REST)로 출력
+		//	트랜잭션 : SELECT(게시물상세) , SELECT(댓글목록) 
+		//	게시물상세 EL : ${KEY_BOARDVO} () 
+		//	댓글목록 EL  : ${KEY_REPLYLIST}
+		//------------------------------------------------------
+		BoardEntity bvo = boardService.svcBoardSelectOne(seq);
+		model.addAttribute("KEY_BOARDVO", bvo);
+		return "board/board_detail";						//   /   lec05_board/board_detail  .jsp
 	}
-
-	//http://localhost:8089/jpa_update
-	@RequestMapping(value="/board_update")
-	public String ctlBoardUpdate(ModelMap model, @ModelAttribute BoardEntity BoardEntity) {
-		//update Boards3 set Board_pw=#{BoardPw} where Board_id=#{BoardId}
-//		BoardEntity.setId(1L);
-//		BoardEntity.setBoardId("admin");
-//		BoardEntity.setBoardPw("444");
-		boardService.svcBoardUpdate(BoardEntity);
-		return "hello";
+	
+	//댓글목록 : REST
+	@RequestMapping(value = "/reply_list_rest" , method = RequestMethod.POST, produces = "application/json" )
+	@ResponseBody 
+	public ResponseEntity<ArrayList<ReplyEntity>> ctlReplyListForRest(Model model
+			, @RequestParam("seq") Long seq){
+		System.out.println(seq);
+		//수정수정*********************************************************************************
+		//ArrayList<ReplyEntity> rlist = (ArrayList)boardService.svcReplySelect(seq);
+		ArrayList<ReplyEntity> rlist = new ArrayList<ReplyEntity>();
+		return new ResponseEntity<>(rlist, HttpStatus.OK);	
 	}
-
-	//http://localhost:8089/jpa_delete/1
-	@RequestMapping(value="/board_delete/{aaa}")
-	public String ctlBoardDelete(ModelMap model, @PathVariable("aaa") Long BoardSeq) {
-		//delete from Boards3 where Board_seq=#{BoardSeq}
-		boardService.svcBoardDelete(BoardSeq);
-		return "hello";
+	
+	//댓글등록 : REST
+	@RequestMapping(value = "/reply_insert_rest" , method = RequestMethod.POST)
+	@ResponseBody 
+	public String ctlReplyInsertForRest(Model model
+			, @ModelAttribute ReplyEntity rvo){
+		System.out.println(rvo.getReply());
+		boardService.svcReplyInsert(rvo);
+		String msg = "컨트롤러실행";
+		return msg;
 	}
+	
+	//댓글삭제 : REST
+	@RequestMapping(value = "/reply_delete_rest" , method = RequestMethod.POST)
+	@ResponseBody 
+	public String ctlReplyDeleteForRest(Model model
+			, @ModelAttribute ReplyEntity rvo){
+		System.out.println(rvo.getRseq());
+		boardService.svcReplyDelete(rvo.getRseq());
+		String msg = "컨트롤러실행";	
+		return msg;
+	}
+	
+	@RequestMapping(value = "/board_update", method = RequestMethod.POST)
+	public String ctlBoardUpdate(Model model, @ModelAttribute BoardEntity bvo){
+		boardService.svcBoardUpdate(bvo);
+		//상세보기파라미터 : seq
+		return "redirect:/board_detail?seq="+bvo.getSeq();						//   /board_detail?seq=3
+	}
+	
+	@RequestMapping(value = "/board_delete", method = RequestMethod.POST)
+	public String ctlBoardDel(Model model, @RequestParam("seq") Long seq){
+		boardService.svcBoardDelete(seq);
+		return "redirect:/board_list";											//   /board_list
+	}
+	
 	
 }
