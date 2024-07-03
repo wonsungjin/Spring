@@ -12,45 +12,52 @@
         <title>Tables - SB Admin</title>
     </head>
 <body>
-
 <!-- --------------------------------------- 게시물 상세보기 ------------------------------- -->
+
 <form id="boardForm" >
-    <input type="hidden" name="seq" value="${KEY_BOARDMAP.my_bvo.seq}">
-    <input type="hidden" name="regid" value="${KEY_BOARDMAP.my_bvo.regid}">
-    
-    <table border="1" width="100%">
-        <tr>
-            <th width="20%">글번호</th>
-            <td width="80%">${KEY_BOARDMAP.my_bvo.seq}</td>
-        </tr>
-        <tr>
-            <th>작성자</th>
-            <td>${KEY_BOARDMAP.my_bvo.regid}</td>
-        </tr>
-        <tr>
-            <th>작성일</th>
-            <td><input type="text" name="regdate" value="${KEY_BOARDMAP.my_bvo.regdate}" readonly></td>
-        </tr>
-        <tr>
-            <th>제목</th>
-            <td><input type="text" name="title" size="60" value="${KEY_BOARDMAP.my_bvo.title}"></td>
-        </tr>
-        <tr>
-            <th>내용</th>
-            <td><textarea name="contents" cols="80" rows="6">${KEY_BOARDMAP.my_bvo.contents}</textarea></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <input type="button" id="uptButton" value="수정">
-                <input type="button" id="delButton" value="삭제">
-                <input type="button" id="listButton" value="목록">
-            </td>
-        </tr>
-    </table>
+<input type="hidden" name="seq" value="${KEY_BOARDVO.seq}">
+<input type="hidden" name="regid" value="${KEY_BOARDVO.regid}">
+
+<table border="1" width="100%">
+<tr>
+   <th width="20%">글번호</th>
+   <td width="80%">${KEY_BOARDVO.seq}</td>
+</tr>
+<tr>
+      <th>작성자</th>
+      <td>${KEY_BOARDVO.regid}</td>
+</tr>
+<tr>
+      <th>작성일</th>
+      <td><input type="text" name="regdate" value="${KEY_BOARDVO.regdate}" readonly></td>
+</tr>
+<tr>
+      <th>제목</th>
+      <td><input type="text" name="title" size=60  value="${KEY_BOARDVO.title}"></td>
+</tr>
+<tr>
+      <th>내용</th>
+      <td><textarea name="contents" cols="80" rows="6">${KEY_BOARDVO.contents}</textarea></td>
+</tr>
+<tr>
+      <th>첨부파일</th>
+      <td>
+      <c:forEach items="${KEY_BOARDVO.files}" var="fvo">
+			${fvo.oname} ${fvo.fsize} KB   &nbsp;&nbsp;&nbsp;
+	  </c:forEach>      
+      </td>
+</tr> 
+
+<tr>
+	<td colspan=2 align="center">
+		<input type="button" id="uptButton" value="수정">
+		<input type="button" id="delButton"  value="삭제">
+		<input type="button" id="listButton" value="목록">
+	</td>
+</table>
 </form>
 
 
-<br><br>
 <!-- --------------------------------------- 댓글목록 ------------------------------- -->
 <br>
 <div id="replyListDiv"></div>
@@ -59,7 +66,7 @@
 <!-- --------------------------------------- 댓글등록 ------------------------------- -->
 <br>
 <form method="post" id="replyInsertForm">
-<input type=hidden name=seq id="seq" value="${KEY_BOARDMAP.my_bvo.seq}">
+<input type=hidden name=seq id="seq" value="${KEY_BOARDVO.seq}">
 <table width=100% border=1>
 <tr>
 	<td>
@@ -73,35 +80,49 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
-    $(function() {
-        // 화면 준비되면 댓글목록 바로 가져오기 :::  REST
-       function makeTable() {
-    $.ajax({
-    	method: "POST",
-        url: "${pageContext.request.contextPath}/reply_list_rest",
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-        data: { seq: "${KEY_BOARDMAP.my_bvo.seq}" },
-        // 기존 방식으로 데이터를 전달
-        error: function(myval) { 
-            console.log("에러:" + myval); 
-        },
-        success: function(myval) { 
-            console.log("성공:" + myval);
-            var htmlStr = "<form><table border=1 width=50%>";
-            $.each(myval, function(index, item) {                                    
-                htmlStr += "<tr><td><input type='button' value='[X]'  class='reply_delete_btn' data-seq='" + item.seq + "' data-rseq='" + item.rseq + "'>" + item.reply + "</td></tr>";
-            });
-            htmlStr += "</table></form>";
-            
-            $("#replyListDiv").empty();
-            $("#replyListDiv").html(htmlStr);
-        }
-    });
-}
-
-
-        // 화면이 실행되자마자 댓글목록 가져오기 :: REST
-        makeTable();
+		$(function() {
+			//---------------------------------------------------------------------------------------------------------
+			//화면 준비되면 댓글목록 바로 가져오기 :::  REST
+			function makeTable() {
+				$.ajax({
+					method      : "POST",
+			        url         : "${pageContext.request.contextPath}/reply_list_rest",
+			        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+			        data 		: "seq=${KEY_BOARDVO.seq}",   
+			  		error 	    : function(myval){ console.log("에러:" + myval);   },
+			  		success     : function(myval){ 
+			  										console.log("성공:" + myval);  //ResponseEntity<>(rlist, HttpStatus.OK)   
+			  										
+			  										//----------------------------------------
+			  										// a href로 삭제 버튼 표현한 경우
+			  										//----------------------------------------
+			  										//var htmlStr = "<table border=1 width=50%>";
+			  										//$.map( myval, function( MYval, MYidx ) {                                    
+			  										//	htmlStr += "<tr><td><font color=red><a href='#' class='reply_delete_a' data-seq='"+MYval.seq+"' data-rseq='"+MYval.rseq+ "'>[X]</a></font>" + MYval.reply + "</td></tr>";
+			  										//});
+			  										//htmlStr += "</table>";
+			  										
+			  										//----------------------------------------
+			  										// form로 삭제 버튼 표현한 경우
+			  										//----------------------------------------
+			  										var htmlStr = "<form><table border=1 width=50%>";
+			  										$.map( myval, function( MYval, MYidx ) {                                    
+			  											htmlStr += "<tr><td><input type='button' value='[X]'  class='reply_delete_btn' data-seq='"+MYval.seq+"' data-rseq='"+MYval.rseq+ "'>" + MYval.reply + "</td></tr>";
+			  										});
+			  										htmlStr += "</table></form>";
+			  										
+			  										
+			  										
+			  										$("#replyListDiv").empty();
+			  										$("#replyListDiv").html(htmlStr);
+			  										
+			  									}
+				});
+			}
+			
+			//---------------------------------------------------------------------------------------------------------
+			//화면이 실행되자마자 댓글목록 가져오기 :: REST
+			makeTable();
 			
 			
 			//---------------------------------------------------------------------------------------------------------

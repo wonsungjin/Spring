@@ -1,180 +1,139 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--  
-	"(properties?, ##
-	settings?,
-	typeAliases?,  ##
-	typeHandlers?,
-	objectFactory?,
-	objectWrapperFactory?,
-	plugins?,
-	environments?,  ##
-	mappers?)"   ##
-	  -->
-
-
 <mapper namespace="com.kosta.semi.mappers.BoardMapper">
 
-	<resultMap id="boardResultMap" type="com.kosta.semi.vo.BoardVO">
-	    <id property="seq" column="seq" />
-	    <result property="title" column="title" />
+	<resultMap id="boardResultMapBySql" type="com.kosta.semi.vo.BoardVO">
+	    <id 	property="seq"      column="seq" />
+	    <result property="title"    column="title" />
 	    <result property="contents" column="contents" />    
-	    <result property="regid" column="regid" />
-	    <result property="regdate" column="regdate" />
+	    <result property="regid"    column="regid" />
+	    <result property="regdate"  column="regdate" />
 	    <collection property="replies" ofType="com.kosta.semi.vo.ReplyVO" select="getReplyBySeq" column="seq" />
 	</resultMap>
 	
+	
 	<resultMap id="replyResultMap" type="com.kosta.semi.vo.ReplyVO">
-	    <id property="rseq" column="rseq" />
-	    <result property="reply" column="reply" />
-	    <result property="regid" column="regid" />
-	    <result property="regdate" column="regdate" />
-	    <result property="seq" column="seq" />
+	    <id 	property="rseq" 	column="rseq" />
+	    <result property="reply" 	column="reply" />
+	    <result property="regid" 	column="regid" />
+	    <result property="regdate"  column="regdate" />
+	    <result property="seq" 		column="seq" />
 	</resultMap>
-	<!-- 
-	id
-	parameterType
-	resultType
-	resultMap
-	 -->
-	 
-	 <!-- Board 리스트  -->
-    <select id="svcBoardDetail" resultMap="boardResultMap">
-        SELECT seq, title, contents, regid, regdate
-        FROM board
-        WHERE seq = #{seq}
-    </select>
-    
-    <select id="svcBoardList" resultMap="boardResultMap">
-        SELECT seq, title, contents, regid, regdate
-        FROM board
-    </select>
-    <insert id="svcBoardInsert" parameterType="com.kosta.semi.vo.BoardVO">
-        insert into board(seq, title, contents, regid, regdate) 
-		values(board_seq.nextval, #{title}, #{contents},user,sysdate)
-    </insert>
-    
-    <update id="svcboardUpdate" parameterType="com.kosta.semi.vo.BoardVO">
-        UPDATE board SET  title=#{title},contents=#{contents} WHERE seq=#{seq}
-    </update>
-
-    <delete id="svcBoardDelete" parameterType="int">
-        DELETE FROM board WHERE seq=#{seq}
-    </delete>
-    
-	 <!-- 관련된 Reply 리스트 -->
-    <select id="getReplyBySeq" resultMap="replyResultMap">
+	<resultMap id="boardResultMapByMap" type="com.kosta.semi.vo.BoardVO">
+	    <id 	property="seq"      column="seq" />
+	    <result property="title"    column="title" />
+	    <result property="contents" column="contents" />    
+	    <result property="regid"    column="regid" />
+	    <result property="regdate"  column="regdate" />
+	    <collection property="replies"  ofType="com.kosta.semi.vo.ReplyVO" resultMap="replyResultMap"/>
+	</resultMap>
+	
+	
+	<resultMap id="fileResultMap" type="com.kosta.semi.vo.FileVO">
+	   	<id 	property="bseq"     column="bseq" />
+	    <result property="oname"    column="oname" />
+	    <result property="sname" 	column="sname" />    
+	    <result property="fsize"    column="fsize" />
+	    <result property="fpath"    column="fpath" />
+	    <result property="seq"    	column="seq" />
+	    <result property="regid"    column="regid" />
+	    <result property="regdate"  column="regdate" />
+	</resultMap>
+	
+	
+	<!-- x번 게시물의 board 상세보기 + 첨부파일 (1:N) board -seq- board_file --> 
+	<resultMap id="boardFileMap" type="com.kosta.semi.vo.BoardVO">
+	    <id 	property="seq"      column="seq" />
+	    <result property="title"    column="title" />
+	    <result property="contents" column="contents" />    
+	    <result property="regid"    column="regid" />
+	    <result property="regdate"  column="regdate" />
+	    <!--   <association property="fileVO"  resultMap="fileResultMap"/>  1:1  -->
+	    <collection property="files"  ofType="com.kosta.semi.vo.FileVO" resultMap="fileResultMap"/>
+	</resultMap>
+	
+	
+	
+	<select id="boardSelect" resultType="com.kosta.semi.vo.BoardVO">
+		select * from board order by seq desc
+	</select>
+	
+	
+	
+	<!-- 관련된 Reply 리스트 -->
+    <select id="getReplyBySeq"   resultType="com.kosta.semi.vo.ReplyVO" >
         SELECT rseq, reply, regid, regdate, seq
-        FROM reply
+        FROM reply   
         WHERE seq = #{seq}
     </select>
-     <!-- 관련된 Reply 리스트 -->
-    <insert id="svcReplyInsertForRest" parameterType="com.kosta.semi.vo.ReplyVO">
-        insert into Reply(rseq, reply, regid, regdate,seq) 
-		values(reply_seq.nextval, #{reply},user,sysdate,#{seq})
-    </insert>
-    <delete id="svcReplyDeleteForRest" parameterType="com.kosta.semi.vo.ReplyVO">
-        DELETE FROM reply WHERE rseq=#{rseq}
-    </delete>
     
-    
+    <!-- 상세보기 + 댓글목록 -->
+    <select id="boardReplySelect" parameterType="int" resultMap="boardResultMapByMap">
+		select b.seq, b.title, b.contents, b.regid, b.regdate, 
+			r.rseq , r.reply, r.regid as rregid, r.regdate as rregdate 
+			from board b, reply r 
+			where b.seq=#{seq} 
+			and b.seq = r.seq(+)
+			order by r.rseq desc	
+	</select>
 	
-	<resultMap id="boardReplyResultMap" type="com.kosta.semi.vo.BoardVO">
-	    <id property="seq" column="b_seq" />
-	    <result property="title" column="b_title" />
-	    <result property="contents" column="b_contents" />
-	    <result property="regid" column="b_regid" />
-	    <result property="regdate" column="b_regdate" />
-	    <collection property="replies" ofType="com.kosta.semi.vo.ReplyVO">
-	        <id property="rseq" column="r_rseq" />
-	        <result property="reply" column="r_reply" />
-	        <result property="regid" column="r_regid" />
-	        <result property="regdate" column="r_regdate" />
-	        <result property="seq" column="r_seq" />
-	    </collection>
-	</resultMap>
-
-	<!-- Board + Reply 조인 -->
-    <select id="svcReplyListForRest" parameterType="com.kosta.semi.vo.BoardVO"  resultMap="boardReplyResultMap">
-	    SELECT b.seq AS b_seq, b.title AS b_title, b.contents AS b_contents, b.regid AS b_regid, b.regdate AS b_regdate,
-           r.rseq AS r_rseq, r.reply AS r_reply, r.regid AS r_regid, r.regdate AS r_regdate, r.seq AS r_seq
-	    FROM board b, reply r 
-	    WHERE b.seq =r.seq(+)
-	    	  and b.seq = #{seq}
+	<!-- x번 게시물의 board 상세보기 --> 
+	<select id="boardSelectOne" parameterType="int" resultType="com.kosta.semi.vo.BoardVO">
+		select * from board where seq=#{seq}
+	</select>
+	
+	<!-- x번 게시물의 reply 목록 --> 
+	<select id="replySelect" parameterType="int" resultType="com.kosta.semi.vo.ReplyVO">
+	select * from reply where seq=#{seq} order by rseq desc
 	</select>
 	
 	
- 	<!-- 
- 	parameterType="int" "com.kitri.biz.dto.UserDTO
-	resultType="hashmap"
-	resultMap="personResultMap"
-	insert  : useGeneratedKeys="true" keyProperty="id"
+	
+	<!-- x번 게시물의 board 상세보기 + 첨부파일 (1:N) board -seq- board_file --> 
+	<select id="boardFileSelectOne" parameterType="int" resultMap="boardFileMap">
+		select b.seq, b.title, b.contents, b.regid, b.regdate
+			  ,f.bseq, f.oname, f.sname, f.fsize, f.fpath
+		from board b, board_file f
+		where b.seq=#{seq} and b.seq = f.seq(+)
+	</select>
 	
 	
-	Object selectOne(String statement, Object parameter)
-	List selectList(String statement, Object parameter)
-	Map selectMap(String statement, Object parameter, String mapKey)
-	int insert(String statement, Object parameter)
-	int update(String statement, Object parameter)
-	int delete(String statement, Object parameter)
-
-	void select(String statement, Object parameter, ResultHandler handler)
-	void select(String statement, Object parameter, RowBounds rowBounds, ResultHandler handler)
-	
-	RowBounds rowBounds = new RowBounds(offset, limit);
-
-	<insert id="insertAuthor" parameterType="domain.blog.Author">
-		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+	<!-- 게시물 저장 --> 
+	<insert id="boardInsert" parameterType="com.kosta.semi.vo.BoardVO" >
+		<!-- useGeneratedKeys="true"  keyProperty="seq" -->
+		<selectKey keyProperty="seq" resultType="int" order="AFTER">
+			SELECT board_seq.currval FROM dual
 		</selectKey>
-		insert into Author
-		(id, username, password, email,bio, favourite_section)
-		values
-		(#{id}, #{username}, #{password}, #{email}, #{bio}, #{favouriteSection,jdbcType=VARCHAR}
-		)
+    	insert into board values(board_seq.nextval,#{title},#{contents},'hong',sysdate)
 	</insert>
+	<!-- 첨부파일 저장 -->
+	<insert id="boardFileInsert" parameterType="com.kosta.semi.vo.FileVO">
+		insert into board_file (bseq, oname, sname, fsize, fpath, seq)
+		values(board_file_seq.nextval, #{oname}, #{sname}, #{fsize}, #{fpath}, #{seq})
+	</insert>
+	
 
-	<sql id="selectColumns"> id,username,password </sql>
-	<select id="selectUsers" parameterType="int" resultType="hashmap">
-		select <include refid="selectColumns"/>
-		from some_table
-		where id = #{id}
-	</select>
 	
-	resultMap
-	resultType="hashmap"
-	resultType="com.kitri.biz.user.dto.UserDTO"
-	typeAlias, resultType="userDTOType"
-	
-	<choose>
-		<when test="title != null">
-			AND title like #{title}
-		</when>
-		<when test="author != null and author.name != null">
-			AND author_name like #{author.name}
-		</when>		
-	<otherwise>
-	
-	<where>
-	
-	//Auto Delete comma,
-	<update id="updateAuthorIfNecessary" parameterType="domain.blog.Author">
-		update userinfo
-			<set>
-				<if test="username != null">username=#{username},</if>
-				<if test="password != null">password=#{password},</if>
-			</set>
-		where id=#{id}
+	<!-- reply 입력 --> 
+	<insert id="replyInsert" parameterType="com.kosta.semi.vo.ReplyVO">
+		insert into reply values(reply_seq.nextval,#{reply},'testid',sysdate,#{seq})
+	</insert>
+		
+	<!-- board 수정 --> 
+	<update id="boardUpdate" parameterType="com.kosta.semi.vo.BoardVO">
+		update board set title=#{title}, contents=#{contents} where seq=#{seq}
 	</update>
 	
-	
-	TRANSACTION
-	void commit()
-	void commit(boolean force)
-	void rollback()
-	void rollback(boolean force)
-	-->
+	<!-- board 삭제 --> 
+	<delete id="boardDelete" parameterType="int">
+		delete from board where seq=#{seq}
+	</delete>
+		
+	<!--  reply 댓글삭제 --> 
+	<delete id="replyDelete" parameterType="int">
+		delete from reply where rseq=#{rseq}
+	</delete>
 	
 	
 </mapper>
