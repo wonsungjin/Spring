@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lec01</groupId>
 	<artifactId>hello</artifactId>
-	<name>spring3_jpa_prj</name>
+	<name>spring3_prj</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -23,6 +23,11 @@
 		</repository>
 	</repositories>
 	<dependencies>
+	<dependency>
+  <groupId>com.google.auth</groupId>
+  <artifactId>google-auth-library-oauth2-http</artifactId>
+  <version>1.1.0</version>
+</dependency>
 		<!-- Hibernate Core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
