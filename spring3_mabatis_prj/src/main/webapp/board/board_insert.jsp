@@ -12,11 +12,9 @@
 </head>
 <body>
 
-
-<form action="${pageContext.request.contextPath}/board_insert" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/board_insert" method="post">
 제목:<input type="text" name="title"><br>
 내용:<textarea name="contents"></textarea><br>
-파일(복수)선택 : <input type="file"  name="ufiles" multiple="multiple" > 
 <input type="submit" value="글쓰기">
 </form>
 
